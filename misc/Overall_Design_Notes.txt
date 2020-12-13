@@ -1,0 +1,148 @@
+-----------------------------------------
+Overall Design:
+-----------------------------------------
+
+The records coming in from the CDW are matched and considered "unique" transactions based on the aggregate of the following fields:
+
+CDWOrderSystemOfRecordID		int
+CDWCustomerOrderNumber			varchar(500)
+CDWAddressOne					varchar(1000)
+CDWCity							varchar(500)
+CDWState						varchar(500)
+CDWPostalCode					varchar(50)
+CDWCountry						varchar(50)
+CDWFloor						varchar(250)
+CDWRoom							varchar(250)
+CDWSuite						varchar(250)
+
+Note:   The Primary Key in tblOrderAddress is a single indentity value.  The unique record constraint described above
+		is enforced by the logic layer within the application and as a unique index on the table)
+		
+		PK Field: OrderAddressID	int (auto-incremented, identity)
+
+		INDEX CONSTRAINT was created with and is represented here:
+
+			USE [AddressManagement]
+			GO
+			
+			/****** Object:  Index [idx_Unique_OrderAddress]    Script Date: 8/28/2018 1:02:44 PM ******/
+			CREATE UNIQUE NONCLUSTERED INDEX [idx_Unique_OrderAddress] ON [dbo].[tblOrderAddress]
+			(
+				[CDWOrderSystemOfRecordID] ASC,
+				[CDWCustomerOrderNumber] ASC,
+				[CDWAddressOne] ASC,
+				[CDWCity] ASC,
+				[CDWState] ASC,
+				[CDWPostalCode] ASC,
+				[CDWCountry] ASC,
+				[CDWFloor] ASC,
+				[CDWRoom] ASC,
+				[CDWSuite] ASC
+			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+			GO
+
+----------------------
+Assumptions:
+----------------------
+
+- The same raw address fields can/will appear on different orders
+- Each time a raw address is assigned/input on a new order, we will create a new transaction in our address migration worflow
+
+----------------------------------------------------------------------
+Logic:  Add new ROW/WORK ITEM vs.  UPDATE STATUS on ROW or WORK ITEM
+----------------------------------------------------------------------
+
+/ pullFromCDW
+
+	[ CDWRecordPuller ] 
+	
+		DateTime _dteMinimumFirstOrderCreateDate;
+	
+		Load(DateTime dte) - Executes the query AGAINST CDW.  If no CutoffDate is supplied, it will be pulled from the config file
+				Execute Query against CDW.... and load results into a list
+	
+		Process()
+		
+		FOREACH CDWOrderAddressRecord Object returned from CDW:
+	
+			CHECK to see if the ORDER + ADDRESS exists by executing a GET query by the composite unique ID fields
+				
+				If DOES NOT exist
+					...add it to tblOrderAddress with a status of 1 - Staged for processing
+				
+				IF it EXISTS
+					... then check its status:
+	
+						If it is ("Staged for processing") or ("IGNORED INDEFINITELY")
+							... leave it as is... since it is already queued up for action
+					
+						Else
+							... Leave its current status in place, but perhaps log that it was detected again AND/OR increment or calc aging 
+					
+/ Process
+		/ GLMSiteCheck
+		/ GLMSiteCodeCreation
+		/ GLMServiceLocationCheck
+		/ SAPCheck
+ 
+	[ OrderAddressBatchOrchestrator ] 
+	
+		Load(BatchType enmBatchType) - BatchTypes are defined for each conceptual group of records that need processing.... which has a method that defines the statuses that define that 
+			- Loads all records that are of the specific status or state that are run as part of this batch into List<OrderAddress> _lstOrderAddresses_ToProcess;
+			- also has a list of issues that cannot be processed = List<OrderAddress> _lstOrderAddresses_ProcessingErrors
+		
+		Process()
+			- Iterates over each OrderAddress in _lstOrderAddresses_ToProcess
+				... foreach...
+					Instantiate a OrderAddressProcessor() and load it... double check the record's status... and then .ProcessNextStep() ...
+
+Called from /Process
+  OR 
+From UI
+  OR
+Ad Hoc
+
+	[ OrderAddressProcessor ]
+
+		Load(int intOrderAddressID)
+			- Loads the OrderAddress_Existing object from the custom DB tables using the PK value
+			
+
+			- LoadRelatedOrders()
+				- Loads a list of "other" Order Addresses for which this address exists = i.e. same: AddressOne, City, State, PostalCode, and Country values... excludes the current order from the list
+
+		    - Set the ENUM typed member for the record's current status
+
+		Process() - iterates over the next step for the record
+
+			GetNextStep() - Based on the current status of the RECORD, callout the next STEP:
+	
+				SearchGLMForSite()
+					- Searches for the SITE in GLM, and then updates the PL Number, and CLII that is found... along with the valid CLII and ExistsInGLM bits
+			
+				SearchGLMForServiceLocation()
+					- Searches for the SERVICE LOCATION in GLM
+			
+				SearchSAPForSite()
+					- Searches for the address in SAP using the PL Number... and sets the counts and bits accordingly
+	
+				SearchSAPForServiceLocation()
+				- Searches for the address in SAP using the SL Number... and sets the counts and bits accordingly
+		
+		OverrideStatus(OrderAddressStatuses enmOrderAddressStatusToSet) - checks business logic to see if the address is in a state that it can be adjusted, and then makes the appropriate adjustment to the status... and SAVE(s) it.
+
+		GetPossibleUserActions(PossibleUserActions enmPossibleUserActions)
+		ProcessUserAction()
+		
+			User Actions / Enums:
+			-----------------------
+			Refresh - Processes the Record (needs to be in a state that will allow it to be Processed)
+			SetToIgnore - Changes the status to "IGNORED INDEFINITELY"
+			RevertToNeedsProcessing - Changes the status to STAGED for PROCESSING if current status is "IGNORED INDEFINITELY"
+
+		
+
+[ Search Manager ]
+
+
+http://10.5.2.146:9102/

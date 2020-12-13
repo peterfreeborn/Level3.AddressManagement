@@ -1,0 +1,162 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>
+       Address Management Email
+    </title>
+    <style rel="stylesheet" type="text/css">
+        body {
+            font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Verdana, Arial, Helvetica, Tahoma, sans-serif;
+            font-size: 12px;
+            background-color: #fff;
+        }
+
+        a {
+            color: #0000ff;
+            border-style: none;
+            border: 0;
+        }
+
+        img {
+            border-style: none;
+            border: 0;
+        }
+
+
+        /* HEADERS & FOOTERS */
+        .header {
+            width: 100%;
+            font-size: 1.5em;
+            color: #fff;
+            font-variant: small-caps;
+            text-transform: none;
+            padding: 15px 15px 15px 15px; /* top right bottom left */
+            margin-top: 0px;
+            margin-bottom: 0px;
+            text-align: left;
+            vertical-align: middle;
+            line-height: 22px;
+            height: 22px;
+            background-color: #5cb85c;
+        }
+
+        .footer {
+            margin-top: 20px;
+            background-color: #5cb85c;
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+            vertical-align: middle;
+            font-size: 14px;
+            text-align: center;
+            color: #fff;
+            padding: 5px 5px 5px 5px; /* top right bottom left */
+        }
+
+
+        .highlight {
+            color: red;
+        }
+
+        .standout {
+            font-weight: 700;
+        }
+
+        .sectionHeader {
+            text-decoration: underline;
+        }
+
+        .numbervalue {
+            text-align: center;
+            width: 160px;
+        }
+
+        .stringvalue {
+            text-align: left;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <div class="header">
+           Address Management - User Action Required Reminder
+        </div>
+        <br />
+    </div>
+
+    <div>
+        {Greeting}
+        <br />
+        <br />
+        The information below was pulled on <font class="standout">{Date}</font> and pertains to order address records that reside in <font class="standout">Address Management</font>.
+        <br />
+        <br />
+        <br />
+    </div>
+
+
+    <div>
+        <br />
+        Number of order ADDRESSES that have <font class="standout">ERRORED</font> BUT will automatically re-attempt the API call and subsequent processing: <font class="highlight">{NumberAddressesErrored}</font>
+        <br />
+        Number of order ADDRESSES that <font class="standout">REQUIRE USER INTERVENTION</font> before additional API calls or processing can be attempted: <font class="highlight">{NumberAddressesAbandoned}</font>
+    </div>
+    <br />
+    <br />
+
+
+    <div>
+        <font class="sectionHeader">
+            The following list is a snapshot (taken on <font class="standout">{Date}</font>) of the order address records that may require USER INTERVENTION.  Please visit the system system to resolve any issues and for a REAL-TIME list, as the data may have since changed:
+        </font>
+        <br />
+        <br />
+        <table border="0" cellpadding="4px" cellspacing="0">
+            <thead>
+                <tr bgcolor="LightYellow">
+                    <td class="stringvalue"><font class="standout">SOR</font></td>
+                    <td class="stringvalue"><font class="standout">Customer Order #</font></td>
+                    <td class="stringvalue"><font class="standout">Address 1</font></td>
+                    <td class="stringvalue"><font class="standout">City</font></td>
+                    <td class="stringvalue"><font class="standout">State</font></td>
+                    <td class="stringvalue"><font class="standout">Country</font></td>
+                    <td class="stringvalue"><font class="standout">Floor</font></td>
+                    <td class="stringvalue"><font class="standout">Room</font></td>
+                    <td class="stringvalue"><font class="standout">Suite</font></td>
+                    <td class="stringvalue"><font class="standout">Migration Status</font></td>
+                    <td class="stringvalue"><font class="standout">Address Type</font></td>
+                </tr>
+            </thead>
+            <!--{OrderAddressTableRows}-->
+        </table>
+
+    </div>
+
+
+    <div>
+        <br />
+        <br />
+        "There are only 10 types of people in the world. Those that understand binary and those that don’t :)"
+        <br />
+        <br />
+    </div>
+
+    <div>
+        <br />
+        "Ciao for now!"
+        <br />
+    </div>
+
+
+    <div>
+        <div class="footer">
+            Address Management Notification Services
+        </div>
+    </div>
+
+</body>
+</html>

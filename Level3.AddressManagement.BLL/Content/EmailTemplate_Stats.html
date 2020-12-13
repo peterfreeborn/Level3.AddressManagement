@@ -1,0 +1,183 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>
+        Address Management Email
+    </title>
+    <style rel="stylesheet" type="text/css">
+        body {
+            font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Verdana, Arial, Helvetica, Tahoma, sans-serif;
+            font-size: 12px;
+            background-color: #fff;
+        }
+
+        a {
+            color: #0000ff;
+            border-style: none;
+            border: 0;
+        }
+
+        img {
+            border-style: none;
+            border: 0;
+        }
+
+
+        /* HEADERS & FOOTERS */
+        .header {
+            width: 100%;
+            font-size: 1.5em;
+            color: #fff;
+            font-variant: small-caps;
+            text-transform: none;
+            padding: 15px 15px 15px 15px; /* top right bottom left */
+            margin-top: 0px;
+            margin-bottom: 0px;
+            text-align: left;
+            vertical-align: middle;
+            line-height: 22px;
+            height: 22px;
+            background-color: #5cb85c;
+        }
+
+        .footer {
+            margin-top: 20px;
+            background-color: #5cb85c;
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+            vertical-align: middle;
+            font-size: 14px;
+            text-align: center;
+            color: #fff;
+            padding: 5px 5px 5px 5px; /* top right bottom left */
+        }
+
+
+        .highlight {
+            color: red;
+        }
+
+        .standout {
+            font-weight: 700;
+        }
+
+        .sectionHeader {
+            text-decoration: underline;
+        }
+
+        .numbervalue {
+            text-align: center;
+            width: 160px;
+        }
+
+        .stringvalue {
+            text-align: left;
+            width: 120px;
+            
+        }
+
+    </style>
+</head>
+<body>
+
+    <div>
+        <div class="header">
+            Address Management System Stats
+        </div>
+        <br />
+    </div>
+
+    <div>
+        {Greeting}
+        <br />
+        <br />
+        The information below provides a summary of data pertinent to the order address records currently within Workflow in <font class="standout">Address Management</font>.
+        <br />
+        <br />
+        <br />
+    </div>
+
+
+    <div>
+        <font class="sectionHeader">The following record counts pertain to <font class="standout">{Date}</font>:</font>
+        <br />
+        <br />
+        Number of Addresses <font class="standout">ADDED</font>: <font class="highlight">{NumberAddressesAdded}</font>
+    </div>
+    <br />
+    <br />
+    <div>
+        <font class="sectionHeader">
+            The following are the system stats for <font class="standout">ALL TIME</font>:
+        </font>
+        <br />
+        <br />
+        Number of <font class="standout">TOTAL</font> Addresses (system wide): <font class="highlight">{NumberTotalAddresses}</font>
+        <br />
+        Number of Addresses SUCCESSFULLY Processed: <font class="highlight">{NumberOfSuccessfullyProcessed}</font>
+        <br />
+    </div>
+
+
+
+
+    <div>
+        <br />
+        <br />
+        <font class="sectionHeader">
+            The following matrix details the <font class="standout">COUNT</font> of order addresses in the system to-date, grouped <font class="standout">by status</font>:
+        </font>
+        <br />
+        <br />
+        <table border="0" cellpadding="4px" cellspacing="0">
+            <thead>
+                <tr bgcolor="LightYellow">
+                    <td class="stringvalue"><font class="standout">Status</font></td>
+                    <td class="numbervalue"><font class="standout"># of Addresses</font></td>
+                </tr>
+            </thead>
+            <!--{StatusTableRows}-->
+        </table>
+
+    </div>
+
+
+
+    <div>
+        <br />
+        <br />
+        <font class="sectionHeader">The following matrix details the <font class="standout">NUMBER</font> of payments in the system to-date, grouped <font class="standout">by Country</font>:</font>
+        <br />
+        <br />
+        <table border="0" cellpadding="4px" cellspacing="0">
+            <thead>
+                <tr bgcolor="LightYellow">
+                    <td class="stringvalue"><font class="standout">Country Code</font></td>
+                    <td class="numbervalue"><font class="standout">Number of Addresses</font></td>
+                </tr>
+            </thead>
+            <!--{CountryTableRows}-->
+        </table>
+    </div>
+
+
+    <div>
+        <br />
+        <br />
+        "There are only 10 types of people in the world. Those that understand binary and those that don’t :)"
+        <br />
+        <br />
+    </div>
+      
+
+    <div>
+        <div class="footer">
+            Address Management Notification Services
+        </div>
+    </div>
+
+</body>
+</html>

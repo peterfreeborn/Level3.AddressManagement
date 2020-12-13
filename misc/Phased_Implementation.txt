@@ -1,0 +1,14 @@
+-----------------------------------------
+Phase 1:
+-----------------------------------------
+
+Console App Only, No Front-End UI
+Hard-coded query w/just DB tables in play that WOULD hold the WHERE clause variables
+
+
+-----------------------------------------
+Phase 2:
+-----------------------------------------
+
+Add Front-End UI
+Dynamic Querying using the DB table that holds the WHERE clause variables

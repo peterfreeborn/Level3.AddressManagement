@@ -1,0 +1,39 @@
+Deploying this app requires deploying both the front (web app) and back ends (console app).
+
+Proper XSLT transforms have been configured for both the front and back ends, and for each target environment (TEST, PROD).
+
+The MISC folder contains a batch file that will deploy the console app after build (be SURE to build for the PROPER configuration and target environment!).
+The Publish endpoints have been properly configured in the web project (be SURE to build for the PROPER configuration and target environment!).
+
+-----------------------------------------------------------------------------------------------------------
+SERVICE ACCOUNT USED TO RUN/CONFIGURE SCHEDULED TASKS that TRIGGER CONSOLE APP FUNCTIONS:
+-----------------------------------------------------------------------------------------------------------
+		LEVEL3\l3svc.oracleebs
+		Or@cle@12
+
+	These are the switches that are baked into the Console App, which must be supplied when configuring the scheduled tasks and/or running or debugging the console app:
+
+		/statsEmail						Sends the stats email to anyone on the distribution list.  The list is managed on the UI by users.  The stats email provides a snapshot of the number of records in the system, with counts grouped by status and country
+		/reminderEmail					Sends the REMINDER email to users on the distribution list.  The list is managed on the UI by users.  The reminder email sends users a reminder to triage any errored and abandoned transactions, including a list of all transactions falling into those categories.
+		/pullFromCDW					Executes a query against CDW, and pulls in any NEW records
+		/sapChecks						Iterates over all the address records that are currently on a status that is AWAITING SAP Existence Check, for either the SITE LOCATION or SERVICE LOCATION address 
+		/processInWorkflow				Iterates over all the address records that have yet to be COMPLETED, ABANDONED, or IGNORED… and processes them accordingly
+		/processNonErrorsInWorkflow		Iterates over all the address records that have yet to be COMPLETED, ABANDONED, or IGNORED…  AND that DID NOT error out on the last call.  This should be used IF THERE IS A KNOWN SYSTEM OUTAGE IN GLM and/or SAP.
+		/retryErrors					Iterates over all the address records that are currently on a status of ERROR… and attempts to process them.  This can be USED to recover, after a SYSTEM OUTAGE in GLM and/or SAP
+		/startNew						Iterates over all the address records that have been staged… and attempts to process them.  This can be used to give processing precedence and preference to the NEWEST records, at times when most recent orders require preferential treatment.
+		/processAll						Processes all statuses
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Add this to the config file if you want to trace api communications originating from this app on the server.  Fiddler is already installed on the TEST server.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  <system.net>
+    <defaultProxy
+                    enabled = "true"
+                    useDefaultCredentials = "true">
+      <proxy autoDetect="false" bypassonlocal="false" proxyaddress="http://127.0.0.1:8888" usesystemdefault="false" />
+    </defaultProxy>
+  </system.net>

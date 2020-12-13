@@ -1,0 +1,43 @@
+
+-- To tail the logfile written by log4net using CygWin
+
+--------------------------------------------------------------------------------------------------------------------
+LOCAL:
+--------------------------------------------------------------------------------------------------------------------
+tail -f /cygdrive/c/logs/Level3.AddressManagement/Level3.AddressManagement.Console.log
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+SERVERS:
+	> Create a mapped network drive with volumne letter "V" for remote server log tailing
+	> V Drive: \\usidcwvweb13\D$\WEBLOGS
+--------------------------------------------------------------------------------------------------------------------
+
+-- TEST INSTANCE:
+tail -f /cygdrive/v/Level3.AddressManagement/Level3.AddressManagement.Console.log
+
+
+--------------------------------------------------------------------------------------------------------------------
+PROD CLUSTER: 
+> P Drive: \\usidcwvweb11\E$\WEBLOGS
+> Q Drive: \\usidcwvweb12\E$\WEBLOGS
+> R Drive: \\usadcwvweb04\E$\WEBLOGS
+--------------------------------------------------------------------------------------------------------------------
+Web:
+tail -f /cygdrive/p/Level3.AddressManagement/Level3.AddressManagement.UI.Web.log tail -f /cygdrive/q/Level3.AddressManagement/Level3.AddressManagement.UI.Web.log tail -f /cygdrive/r/Level3.AddressManagement/Level3.AddressManagement.UI.Web.log
+
+Consoole: 
+tail -f /cygdrive/p/Level3.AddressManagement/Level3.AddressManagement.Console.log
+
+
+--------------------------------------------------------------------------------------------------------------------
+SMTP Server:
+	> onsite smtp server used for log4net smtp appenders
+--------------------------------------------------------------------------------------------------------------------
+scanmail.level3.com
+
+
+
+
+

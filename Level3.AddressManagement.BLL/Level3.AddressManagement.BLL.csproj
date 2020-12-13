@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Level3.AddressManagement.BLL</RootNamespace>
+    <AssemblyName>Level3.AddressManagement.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ProdWebServerCluster|AnyCPU'">
+    <OutputPath>bin\ProdWebServerCluster\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\DeveloperControlledConfigOptionDisplayHelper.cs" />
+    <Compile Include="Admin\SystemLogItemListLoader.cs" />
+    <Compile Include="Admin\UserConfigurableSystemConfigSettingHelper.cs" />
+    <Compile Include="APICallLog\APICallLogItemListLoader.cs" />
+    <Compile Include="CDW\CDWOrderAddressRecordUtil.cs" />
+    <Compile Include="CDW\CDWRecordPuller.cs" />
+    <Compile Include="CDW\DynamicQueryBuilder.cs" />
+    <Compile Include="CDW\Translators\TranslateDW_SOURCE_SYSTEM_CDToOrderSystemOfRecord.cs" />
+    <Compile Include="CDW\Translators\TranslateCDWOrderAddressRecordToOrderAddress.cs" />
+    <Compile Include="Common\CLIIUtility.cs" />
+    <Compile Include="Common\EnumUtil.cs" />
+    <Compile Include="Deprecated\AddressMigrationManager.cs" />
+    <Compile Include="Deprecated\AddressMigrator.cs" />
+    <Compile Include="Common\ConfigHelper.cs" />
+    <Compile Include="Deprecated\FileAndDirectoryLocationCalculator.cs" />
+    <Compile Include="Email\EmailBodyHelper.cs" />
+    <Compile Include="Email\NotificationManager.cs" />
+    <Compile Include="Email\SMTPEmailUtility.cs" />
+    <Compile Include="GLM\GLMResponseUtil.cs" />
+    <Compile Include="OrderAddressBatchOrchestrator.cs" />
+    <Compile Include="OrderAddressProcessor.cs" />
+    <Compile Include="OrderAddressStateEvaluator.cs" />
+    <Compile Include="OrderAddressUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GLM\SiteLocationAnalyzer.cs" />
+    <Compile Include="Deprecated\SourceAddressFileManager.cs" />
+    <Compile Include="Deprecated\SourceFileManager.cs" />
+    <Compile Include="SAP\SAPAddressSearchResponseUtil.cs" />
+    <Compile Include="Search\OrderAddressSearchControlStateUtil.cs" />
+    <Compile Include="Search\OrderAddressSearchManager.cs" />
+    <Compile Include="Search\OrderDateRangeCalculator.cs" />
+    <Compile Include="Search\OrderAddressListDateRangeFilterType.cs" />
+    <Compile Include="Search\OrderAddressListFilter.cs" />
+    <Compile Include="Search\OrderAddressListLoader.cs" />
+    <Compile Include="Common\SystemLogItemUtil.cs" />
+    <Compile Include="Stats\OrderAddressStatHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Level3.AddressManagement.DAL\Level3.AddressManagement.DAL.csproj">
+      <Project>{62e9391b-982d-4e1a-8c08-05c282580486}</Project>
+      <Name>Level3.AddressManagement.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Level3.AddressManagement.Model\Level3.AddressManagement.Model.csproj">
+      <Project>{112f3a00-31cf-4c8c-8fec-f6cad538d5cd}</Project>
+      <Name>Level3.AddressManagement.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Level3.AddressManagement.RAL\Level3.AddressManagement.RAL.csproj">
+      <Project>{15596f3b-55e0-4ed3-81d1-03583e0c1b74}</Project>
+      <Name>Level3.AddressManagement.RAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Content\EmailTemplate_Stats.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\EmailTemplate_UserActionNeededReminder.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

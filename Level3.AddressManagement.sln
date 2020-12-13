@@ -1,0 +1,131 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level3.AddressManagement.RAL", "Level3.AddressManagement.RAL\Level3.AddressManagement.RAL.csproj", "{15596F3B-55E0-4ED3-81D1-03583E0C1B74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level3.AddressManagement.BLL", "Level3.AddressManagement.BLL\Level3.AddressManagement.BLL.csproj", "{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "testing", "testing", "{B490E36E-5E01-4F42-B1EE-A28D08B15B2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level3.AddressManagement.UnitTest", "Level3.AddressManagement.UnitTest\Level3.AddressManagement.UnitTest.csproj", "{BA9F3F1D-FFAE-473B-806A-D71969246EBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level3.AddressManagement.Model", "Level3.AddressManagement.Model\Level3.AddressManagement.Model.csproj", "{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{28129684-E0F2-48ED-9DF0-F7DDE3A5447F}"
+	ProjectSection(SolutionItems) = preProject
+		lib\Syncfusion.Compression.Base.dll = lib\Syncfusion.Compression.Base.dll
+		lib\Syncfusion.Core.dll = lib\Syncfusion.Core.dll
+		lib\Syncfusion.DocIO.Base.dll = lib\Syncfusion.DocIO.Base.dll
+		lib\Syncfusion.EJ.dll = lib\Syncfusion.EJ.dll
+		lib\Syncfusion.EJ.Web.dll = lib\Syncfusion.EJ.Web.dll
+		lib\Syncfusion.ExcelToPdfConverter.Base.dll = lib\Syncfusion.ExcelToPdfConverter.Base.dll
+		lib\Syncfusion.Pdf.Base.dll = lib\Syncfusion.Pdf.Base.dll
+		lib\Syncfusion.XlsIO.Base.dll = lib\Syncfusion.XlsIO.Base.dll
+		lib\Telerik.Web.Design.dll = lib\Telerik.Web.Design.dll
+		lib\Telerik.Web.Device.Detection.dll = lib\Telerik.Web.Device.Detection.dll
+		lib\Telerik.Web.UI.dll = lib\Telerik.Web.UI.dll
+		lib\Telerik.Web.UI.Skins.dll = lib\Telerik.Web.UI.Skins.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level3.AddressManagement.Console", "Level3.AddressManagement.Console\Level3.AddressManagement.Console.csproj", "{047EBF1D-1451-46DF-81B1-FFE31C477C2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level3.AddressManagement.DAL", "Level3.AddressManagement.DAL\Level3.AddressManagement.DAL.csproj", "{62E9391B-982D-4E1A-8C08-05C282580486}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{380FBC0B-89EF-4EA8-A242-77E5BE29D03B}"
+	ProjectSection(SolutionItems) = preProject
+		misc\___Console_Deploy_PROD__DONT_FORGET_TO_BUILD_FOR_PROD.bat = misc\___Console_Deploy_PROD__DONT_FORGET_TO_BUILD_FOR_PROD.bat
+		misc\___Console_Deploy_TEST__DONT_FORGET_TO_BUILD_FOR_TEST.bat = misc\___Console_Deploy_TEST__DONT_FORGET_TO_BUILD_FOR_TEST.bat
+		misc\CygWin_Commands.txt = misc\CygWin_Commands.txt
+		misc\Deploy_Notes.txt = misc\Deploy_Notes.txt
+		misc\Go_Live_SQLScript_Clear_ALL_Non_Lookoup_And_Config_Tables.sql = misc\Go_Live_SQLScript_Clear_ALL_Non_Lookoup_And_Config_Tables.sql
+		misc\Overall_Design_Notes.txt = misc\Overall_Design_Notes.txt
+		misc\Phased_Implementation.txt = misc\Phased_Implementation.txt
+		SAP_Rest_Info.txt = SAP_Rest_Info.txt
+		misc\SQL_Create_TABLES_STORED_PROCS_LOOKUP_TABLE_DATE_Script_Clean_GO_LIVE.sql = misc\SQL_Create_TABLES_STORED_PROCS_LOOKUP_TABLE_DATE_Script_Clean_GO_LIVE.sql
+		misc\SQL_Server_Info.txt = misc\SQL_Server_Info.txt
+		misc\SQL_Stored_Proc_Creation_Script_All_Required_Procs.sql = misc\SQL_Stored_Proc_Creation_Script_All_Required_Procs.sql
+		misc\Testing_Plan.txt = misc\Testing_Plan.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level3.AddressManagement.UI.Web", "Level3.AddressManagement.UI.Web\Level3.AddressManagement.UI.Web.csproj", "{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "non_web_project_xslt_tranform_plugin", "non_web_project_xslt_tranform_plugin", "{AB2F07E9-2158-4B25-A07C-19B88EEB3DD9}"
+	ProjectSection(SolutionItems) = preProject
+		misc\non_web_project_xslt_tranform_plugin\Microsoft.VisualStudio.SlowCheetah.vsix = misc\non_web_project_xslt_tranform_plugin\Microsoft.VisualStudio.SlowCheetah.vsix
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		ProdWebServerCluster|Any CPU = ProdWebServerCluster|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Test|Any CPU = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15596F3B-55E0-4ED3-81D1-03583E0C1B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15596F3B-55E0-4ED3-81D1-03583E0C1B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15596F3B-55E0-4ED3-81D1-03583E0C1B74}.ProdWebServerCluster|Any CPU.ActiveCfg = ProdWebServerCluster|Any CPU
+		{15596F3B-55E0-4ED3-81D1-03583E0C1B74}.ProdWebServerCluster|Any CPU.Build.0 = ProdWebServerCluster|Any CPU
+		{15596F3B-55E0-4ED3-81D1-03583E0C1B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15596F3B-55E0-4ED3-81D1-03583E0C1B74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15596F3B-55E0-4ED3-81D1-03583E0C1B74}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{15596F3B-55E0-4ED3-81D1-03583E0C1B74}.Test|Any CPU.Build.0 = Test|Any CPU
+		{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}.ProdWebServerCluster|Any CPU.ActiveCfg = ProdWebServerCluster|Any CPU
+		{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}.ProdWebServerCluster|Any CPU.Build.0 = ProdWebServerCluster|Any CPU
+		{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{7A832E62-4C6F-421B-8BDC-290C0B0CE7A0}.Test|Any CPU.Build.0 = Test|Any CPU
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA}.ProdWebServerCluster|Any CPU.ActiveCfg = ProdWebServerCluster|Any CPU
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA}.ProdWebServerCluster|Any CPU.Build.0 = ProdWebServerCluster|Any CPU
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA}.Test|Any CPU.Build.0 = Test|Any CPU
+		{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}.ProdWebServerCluster|Any CPU.ActiveCfg = ProdWebServerCluster|Any CPU
+		{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}.ProdWebServerCluster|Any CPU.Build.0 = ProdWebServerCluster|Any CPU
+		{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{112F3A00-31CF-4C8C-8FEC-F6CAD538D5CD}.Test|Any CPU.Build.0 = Test|Any CPU
+		{047EBF1D-1451-46DF-81B1-FFE31C477C2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{047EBF1D-1451-46DF-81B1-FFE31C477C2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{047EBF1D-1451-46DF-81B1-FFE31C477C2D}.ProdWebServerCluster|Any CPU.ActiveCfg = ProdWebServerCluster|Any CPU
+		{047EBF1D-1451-46DF-81B1-FFE31C477C2D}.ProdWebServerCluster|Any CPU.Build.0 = ProdWebServerCluster|Any CPU
+		{047EBF1D-1451-46DF-81B1-FFE31C477C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{047EBF1D-1451-46DF-81B1-FFE31C477C2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{047EBF1D-1451-46DF-81B1-FFE31C477C2D}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{047EBF1D-1451-46DF-81B1-FFE31C477C2D}.Test|Any CPU.Build.0 = Test|Any CPU
+		{62E9391B-982D-4E1A-8C08-05C282580486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E9391B-982D-4E1A-8C08-05C282580486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62E9391B-982D-4E1A-8C08-05C282580486}.ProdWebServerCluster|Any CPU.ActiveCfg = ProdWebServerCluster|Any CPU
+		{62E9391B-982D-4E1A-8C08-05C282580486}.ProdWebServerCluster|Any CPU.Build.0 = ProdWebServerCluster|Any CPU
+		{62E9391B-982D-4E1A-8C08-05C282580486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62E9391B-982D-4E1A-8C08-05C282580486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62E9391B-982D-4E1A-8C08-05C282580486}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{62E9391B-982D-4E1A-8C08-05C282580486}.Test|Any CPU.Build.0 = Test|Any CPU
+		{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}.ProdWebServerCluster|Any CPU.ActiveCfg = ProdWebServerCluster|Any CPU
+		{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}.ProdWebServerCluster|Any CPU.Build.0 = ProdWebServerCluster|Any CPU
+		{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{BFC1B19B-1A79-46C0-82C4-D4C0675E1873}.Test|Any CPU.Build.0 = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BA9F3F1D-FFAE-473B-806A-D71969246EBA} = {B490E36E-5E01-4F42-B1EE-A28D08B15B2B}
+		{AB2F07E9-2158-4B25-A07C-19B88EEB3DD9} = {380FBC0B-89EF-4EA8-A242-77E5BE29D03B}
+	EndGlobalSection
+EndGlobal

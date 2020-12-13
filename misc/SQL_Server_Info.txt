@@ -1,0 +1,203 @@
+-----------------------------------------
+SQL Server Backend:
+-----------------------------------------
+
+Server: USIDCVSQLHR01
+DB:		AddressManagement
+User:	address_management_user
+Pword:	@ddressM@n@gement123!
+
+
+
+-----------------------------------------
+Stored Procs:
+-----------------------------------------
+tblOrderAddress_Insert
+tblOrderAddress_SelBy_CDWAddressOne_EQ_CDWCity_EQ_CDWState_EQ_CDWPostalCode_EQ_CDWCountry_EQ
+tblOrderAddress_SelBy_OrderSystemOfRecordID_EQ_CDWCustomerOrderNumber_EQ_CDWAddressOne_EQ_CDWCity_EQ_CDWState_EQ_C_TRUNC
+tblOrderAddress_SelByIDENT_OrderAddressID_EQ
+tblOrderAddress_UpdateOptimistic
+tblOrderAddress_Update
+*tblOrderAddress_SelByDyn_H1_Custom
+
+tblOrderAddressLogItem_SelByFK_H1_OrderAddressID_EQ
+tblOrderAddressLogItem_Insert
+
+tblMigrationStatus_SelAll
+tblMigrationStatus_SelByPK_MigrationStatusID_EQ
+
+
+
+USE [AddressManagement]
+GO
+/****** Object:  StoredProcedure [dbo].[tblOrderAddress_SelByDyn_H1_Custom]    Script Date: 9/5/2018 12:58:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =====================================================================
+-- Proc Name:   tblOrderAddress_SelByDyn_H1_Custom
+-- Author:      Muir, Brendan
+-- Project:     AddressManagement
+-- =====================================================================
+ALTER PROCEDURE [dbo].[tblOrderAddress_SelByDyn_H1_Custom]
+(@DynamicWhereClause varchar(max),@DynamicOrderByClause varchar(max), @RowsPerPage int, @PageNumber int)
+AS
+SET NOCOUNT  ON
+DECLARE @SQL NVARCHAR(max)
+DECLARE @InnerWhereClauseStatement NVARCHAR(max)
+IF(LEN(@DynamicWhereClause) > 0)
+SET @InnerWhereClauseStatement = ' WHERE (' + @DynamicWhereClause + ')'
+ELSE
+SET @InnerWhereClauseStatement = ''
+DECLARE @InnerOrderByClauseStatement NVARCHAR(max)
+ IF(LEN(@DynamicOrderByClause) > 0)
+SET @InnerOrderByClauseStatement = '(ORDER BY ' + @DynamicOrderByClause + ' )'
+ELSE
+SET @InnerOrderByClauseStatement = '(ORDER BY (Select 1))'
+SET @SQL = 'SELECT 
+	*
+FROM (
+	SELECT 
+	'''' AS DataHash,
+	 tblOrderAddress.OrderAddressID as OrderAddressID,
+	 tblOrderAddress.OrderAddressTypeID as OrderAddressTypeID,
+	 tblOrderAddress.MigrationStatusID as MigrationStatusID,
+	 tblOrderAddress.OrderSystemOfRecordID as OrderSystemOfRecordID,
+	 tblOrderAddress.CDWCustomerOrderNumber as CDWCustomerOrderNumber,
+	 tblOrderAddress.CDWAddressOne as CDWAddressOne,
+	 tblOrderAddress.CDWCity as CDWCity,
+	 tblOrderAddress.CDWState as CDWState,
+	 tblOrderAddress.CDWPostalCode as CDWPostalCode,
+	 tblOrderAddress.CDWCountry as CDWCountry,
+	 tblOrderAddress.CDWFloor as CDWFloor,
+	 tblOrderAddress.CDWRoom as CDWRoom,
+	 tblOrderAddress.CDWSuite as CDWSuite,
+	 tblOrderAddress.CDWCLII as CDWCLII,
+	 tblOrderAddress.ValidCLII as ValidCLII,
+	 tblOrderAddress.GLMPLNumber as GLMPLNumber,
+	 tblOrderAddress.GLMSLNumber as GLMSLNumber,
+	 tblOrderAddress.ExistsInGLMAsSite as ExistsInGLMAsSite,
+	 tblOrderAddress.GLMSiteCode as GLMSiteCode,
+	 tblOrderAddress.HasGLMSiteCode as HasGLMSiteCode,
+	 tblOrderAddress.ExistsInGLMAsServiceLocation as ExistsInGLMAsServiceLocation,
+	 tblOrderAddress.ExistsInSAPAsSite as ExistsInSAPAsSite,
+	 tblOrderAddress.ExistsInSAPAsServiceLocation as ExistsInSAPAsServiceLocation,
+	 tblOrderAddress.NumberOfRecordsInSAPWithPL as NumberOfRecordsInSAPWithPL,
+	 tblOrderAddress.NumberOfRecordsInSAPWithSL as NumberOfRecordsInSAPWithSL,
+	 tblOrderAddress.SourceCreationDate as SourceCreationDate,
+	 tblOrderAddress.SourceLastModifyDate as SourceLastModifyDate,
+	 tblOrderAddress.NumberOfSiteCreationFailures as NumberOfSiteCreationFailures,
+	 tblOrderAddress.NumberOfSiteCodeCreationFailures as NumberOfSiteCodeCreationFailures,
+	 tblOrderAddress.NumberOfServiceLocationCreationFailures as NumberOfServiceLocationCreationFailures,
+	 tblOrderAddress.DateCreated as DateCreated,
+	 tblOrderAddress.DateUpdated as DateUpdated,
+	 tblOrderAddress.NumberOfSAPValidationChecks as NumberOfSAPValidationChecks,
+	 tblOrderAddress.DateTimeOfLastMigrationStatusUpdate as DateTimeOfLastMigrationStatusUpdate,
+	 tblOrderAddress.NextEarliestScheduledSAPValidationCheck as NextEarliestScheduledSAPValidationCheck,
+	 tblMigrationStatusH1.MigrationStatusID as MigrationStatusID_H1,
+	 tblMigrationStatusH1.MigrationStatusDesc as MigrationStatusDesc,
+	 tblMigrationStatusH1.MigrationStatusExtendedDescription as MigrationStatusExtendedDescription,
+	 tblOrderAddressTypeH1.OrderAddressTypeID as OrderAddressTypeID_H1,
+	 tblOrderAddressTypeH1.OrderAddressTypeDesc as OrderAddressTypeDesc,
+	 tblOrderSystemOfRecordH1.OrderSystemOfRecordID as OrderSystemOfRecordID_H1,
+	 tblOrderSystemOfRecordH1.OrderSystemOfRecordDesc as OrderSystemOfRecordDesc
+	,ROW_NUMBER() OVER' +  @InnerOrderByClauseStatement +  ' AS RowNum
+	FROM 
+
+tblOrderAddress
+ LEFT JOIN tblMigrationStatus tblMigrationStatusH1 ON tblOrderAddress.MigrationStatusID = tblMigrationStatusH1.MigrationStatusID 
+ LEFT JOIN tblOrderAddressType tblOrderAddressTypeH1 ON tblOrderAddress.OrderAddressTypeID = tblOrderAddressTypeH1.OrderAddressTypeID 
+ LEFT JOIN tblOrderSystemOfRecord tblOrderSystemOfRecordH1 ON tblOrderAddress.OrderSystemOfRecordID = tblOrderSystemOfRecordH1.OrderSystemOfRecordID
+	' + @InnerWhereClauseStatement + ') AS ResultSet 
+	WHERE ResultSet.RowNum BETWEEN ((' + CONVERT(varchar(MAX), @PageNumber) + '-1)*' + CONVERT(varchar(MAX), @RowsPerPage) +')+1 AND '+ CONVERT(varchar(MAX), @RowsPerPage) +'*(' + CONVERT(varchar(MAX), @PageNumber) + ')' 
+--PRINT @SQL;
+EXECUTE sp_executesql @SQL
+
+
+
+BEFORE - OLD - DEPRECATED:
+
+
+USE [AddressManagement]
+GO
+/****** Object:  StoredProcedure [dbo].[tblOrderAddress_SelByDyn_H1_Custom]    Script Date: 9/5/2018 12:09:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =====================================================================
+-- Proc Name:   tblOrderAddress_SelByDyn_H1_Custom
+-- Author:      Muir, Brendan
+-- Project:     AddressManagement
+-- =====================================================================
+ALTER PROCEDURE [dbo].[tblOrderAddress_SelByDyn_H1_Custom]
+(@DynamicWhereClause varchar(max),@DynamicOrderByClause varchar(max), @RowsPerPage int, @PageNumber int)
+AS
+SET NOCOUNT  ON
+DECLARE @SQL NVARCHAR(max)
+DECLARE @InnerWhereClauseStatement NVARCHAR(max)
+IF(LEN(@DynamicWhereClause) > 0)
+SET @InnerWhereClauseStatement = ' WHERE (' + @DynamicWhereClause + ')'
+ELSE
+SET @InnerWhereClauseStatement = ''
+DECLARE @InnerOrderByClauseStatement NVARCHAR(max)
+ IF(LEN(@DynamicOrderByClause) > 0)
+SET @InnerOrderByClauseStatement = '(ORDER BY ' + @DynamicOrderByClause + ' )'
+ELSE
+SET @InnerOrderByClauseStatement = '(ORDER BY (Select 1))'
+SET @SQL = 'SELECT 
+	*
+FROM (
+	SELECT 
+	'''' AS DataHash,
+	 tblOrderAddress.OrderAddressID as OrderAddressID,
+	 tblOrderAddress.OrderAddressTypeID as OrderAddressTypeID,
+	 tblOrderAddress.MigrationStatusID as MigrationStatusID,
+	 tblOrderAddress.OrderSystemOfRecordID as OrderSystemOfRecordID,
+	 tblOrderAddress.CDWCustomerOrderNumber as CDWCustomerOrderNumber,
+	 tblOrderAddress.CDWAddressOne as CDWAddressOne,
+	 tblOrderAddress.CDWCity as CDWCity,
+	 tblOrderAddress.CDWState as CDWState,
+	 tblOrderAddress.CDWPostalCode as CDWPostalCode,
+	 tblOrderAddress.CDWCountry as CDWCountry,
+	 tblOrderAddress.CDWFloor as CDWFloor,
+	 tblOrderAddress.CDWRoom as CDWRoom,
+	 tblOrderAddress.CDWSuite as CDWSuite,
+	 tblOrderAddress.CDWCLII as CDWCLII,
+	 tblOrderAddress.ValidCLII as ValidCLII,
+	 tblOrderAddress.GLMPLNumber as GLMPLNumber,
+	 tblOrderAddress.GLMSLNumber as GLMSLNumber,
+	 tblOrderAddress.ExistsInGLMAsSite as ExistsInGLMAsSite,
+	 tblOrderAddress.GLMSiteCode as GLMSiteCode,
+	 tblOrderAddress.HasGLMSiteCode as HasGLMSiteCode,
+	 tblOrderAddress.ExistsInGLMAsServiceLocation as ExistsInGLMAsServiceLocation,
+	 tblOrderAddress.ExistsInSAPAsSite as ExistsInSAPAsSite,
+	 tblOrderAddress.ExistsInSAPAsServiceLocation as ExistsInSAPAsServiceLocation,
+	 tblOrderAddress.NumberOfRecordsInSAPWithPL as NumberOfRecordsInSAPWithPL,
+	 tblOrderAddress.NumberOfRecordsInSAPWithSL as NumberOfRecordsInSAPWithSL,
+	 tblOrderAddress.SourceCreationDate as SourceCreationDate,
+	 tblOrderAddress.SourceLastModifyDate as SourceLastModifyDate,
+	 tblOrderAddress.NumberOfSiteCreationFailures as NumberOfSiteCreationFailures,
+	 tblOrderAddress.NumberOfSiteCodeCreationFailures as NumberOfSiteCodeCreationFailures,
+	 tblOrderAddress.NumberOfServiceLocationCreationFailures as NumberOfServiceLocationCreationFailures,
+	 tblOrderAddress.DateCreated as DateCreated,
+	 tblOrderAddress.DateUpdated as DateUpdated,
+	 tblMigrationStatusH1.MigrationStatusID as MigrationStatusID_H1,
+	 tblMigrationStatusH1.MigrationStatusDesc as MigrationStatusDesc,
+	 tblMigrationStatusH1.MigrationStatusExtendedDescription as MigrationStatusExtendedDescription,
+	 tblOrderAddressTypeH1.OrderAddressTypeID as OrderAddressTypeID_H1,
+	 tblOrderAddressTypeH1.OrderAddressTypeDesc as OrderAddressTypeDesc,
+	 tblOrderSystemOfRecordH1.OrderSystemOfRecordID as OrderSystemOfRecordID_H1,
+	 tblOrderSystemOfRecordH1.OrderSystemOfRecordDesc as OrderSystemOfRecordDesc
+	,ROW_NUMBER() OVER' +  @InnerOrderByClauseStatement +  ' AS RowNum
+	FROM 
+
+tblOrderAddress
+ LEFT JOIN tblMigrationStatus tblMigrationStatusH1 ON tblOrderAddress.MigrationStatusID = tblMigrationStatusH1.MigrationStatusID 
+ LEFT JOIN tblOrderAddressType tblOrderAddressTypeH1 ON tblOrderAddress.OrderAddressTypeID = tblOrderAddressTypeH1.OrderAddressTypeID 
+ LEFT JOIN tblOrderSystemOfRecord tblOrderSystemOfRecordH1 ON tblOrderAddress.OrderSystemOfRecordID = tblOrderSystemOfRecordH1.OrderSystemOfRecordID
+	' + @InnerWhereClauseStatement + ') AS ResultSet 
+	WHERE ResultSet.RowNum BETWEEN ((' + CONVERT(varchar(MAX), @PageNumber) + '-1)*' + CONVERT(varchar(MAX), @RowsPerPage) +')+1 AND '+ CONVERT(varchar(MAX), @RowsPerPage) +'*(' + CONVERT(varchar(MAX), @PageNumber) + ')' 
+--PRINT @SQL;
+EXECUTE sp_executesql @SQL

@@ -1,0 +1,8 @@
+-----------------------------------------
+Testing Plan:
+-----------------------------------------
+
+(may need to dummy this data up as a fake query result / Unit Test... if we don't have EON and Pipeline E2E)
+
+Add a NEW ORDER to both EON and PIPELINE with the EXACT SAME ADDRESS for a SITE LOCATION (contains Room, Floor, and Suite)
+Add a NEW ORDER to both EON and PIPELINE with the EON record having only the BASE address fields, and the PIPELINE order having the SERVICEL LOCATION fields populated (contains Room, Floor, and Suite)
